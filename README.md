@@ -1,4 +1,4 @@
-Docker PHP
+CyloTech Docker PHP
 ==========
 
 **Docker PHP** (for lack of a better name) is a [Docker](http://docker.com/) client written in PHP.
