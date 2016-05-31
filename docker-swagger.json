@@ -64,13 +64,19 @@
         }
       }
     },
-    "mount": {
+    "Mount": {
       "type": "object",
       "properties": {
+        "Name": {
+          "type": "string"
+        },
         "Source": {
           "type": "string"
         },
         "Destination": {
+          "type": "string"
+        },
+        "Driver": {
           "type": "string"
         },
         "Mode": {
@@ -78,6 +84,9 @@
         },
         "RW": {
           "type": "boolean"
+        },
+        "Propagation": {
+          "type": "string"
         }
       }
     },
@@ -227,6 +236,12 @@
         "OomKillDisable": {
           "type": "boolean"
         },
+        "OomScoreAdj": {
+          "type": "integer"
+        },
+        "PidsLimit": {
+          "type": "integer"
+        },
         "PortBindings": {
           "type": ["object", "null"],
           "additionalProperties": {
@@ -246,6 +261,12 @@
           "type": "boolean"
         },
         "Dns": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "DnsOptions": {
           "type": ["array", "null"],
           "items": {
             "type": "string"
@@ -281,8 +302,17 @@
             "type": "string"
           }
         },
+        "GroupAdd": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        },
         "RestartPolicy": {
           "$ref": "#/definitions/RestartPolicy"
+        },
+        "UsernsMode": {
+          "type": "string"
         },
         "NetworkMode": {
           "type": "string"
@@ -310,6 +340,12 @@
         },
         "CgroupParent": {
           "type": "string"
+        },
+        "VolumeDriver": {
+          "type": "string"
+        },
+        "ShmSize": {
+          "type": "integer"
         }
       }
     },
@@ -358,6 +394,9 @@
         },
         "Created": {
           "type": "integer"
+        },
+        "State": {
+          "type": "string"
         },
         "Status": {
           "type": "string"
@@ -434,7 +473,7 @@
         "Mounts": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/mount"
+            "$ref": "#/definitions/Mount"
           }
         },
         "WorkingDir": {
@@ -636,7 +675,7 @@
         "Mounts": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/definitions/mount"
+            "$ref": "#/definitions/Mount"
           }
         }
       }
@@ -860,6 +899,12 @@
         "Architecture": {
           "type": "string"
         },
+        "ClusterStore": {
+          "type": "string"
+        },
+        "CgroupDriver": {
+          "type": "string"
+        },
         "Containers": {
           "type": "integer"
         },
@@ -937,6 +982,9 @@
         },
         "InitSha1": {
           "type": "string"
+        },
+        "KernelMemory": {
+          "type": "boolean"
         },
         "KernelVersion": {
           "type": "string"
@@ -1196,8 +1244,14 @@
         "Driver": {
           "type": "string"
         },
+        "EnableIPv6": {
+          "type": "boolean"
+        },
         "IPAM": {
           "$ref": "#/definitions/IPAM"
+        },
+        "Internal": {
+          "type": "boolean"
         },
         "Containers": {
           "type": "object",
@@ -1284,14 +1338,32 @@
         "Name": {
           "type": "string"
         },
+        "CheckDuplicate": {
+          "type": "boolean"
+        },
         "Driver": {
           "type": "string"
+        },
+        "EnableIPv6": {
+          "type": "boolean"
         },
         "IPAM": {
           "$ref": "#/definitions/IPAM"
         },
         "Internal": {
           "type": "boolean"
+        },
+        "Options": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "Labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1488,6 +1560,9 @@
         },
         "KernelMemory": {
           "type": "integer"
+        },
+        "RestartPolicy": {
+          "$ref": "#/definitions/RestartPolicy"
         }
       }
     },
@@ -1499,6 +1574,17 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AuthResult": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "string"
+        },
+        "IdentityToken": {
+          "type": "string"
         }
       }
     }
@@ -2918,7 +3004,10 @@
         "operationId": "checkAuthentication",
         "responses": {
           "200": {
-            "description": "No error"
+            "description": "No error",
+            "schema": {
+              "$ref": "#/definitions/AuthResult"
+            }
           },
           "204": {
             "description": "No error"
