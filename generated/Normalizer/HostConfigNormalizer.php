@@ -89,6 +89,9 @@ class HostConfigNormalizer extends SerializerAwareNormalizer implements Denormal
         if (property_exists($data, 'CpuPeriod')) {
             $object->setCpuPeriod($data->{'CpuPeriod'});
         }
+        if (property_exists($data, 'CpuQuota')) {
+            $object->setCpuQuota($data->{'CpuQuota'});
+        }
         if (property_exists($data, 'CpusetCpus')) {
             $object->setCpusetCpus($data->{'CpusetCpus'});
         }
@@ -441,6 +444,9 @@ class HostConfigNormalizer extends SerializerAwareNormalizer implements Denormal
         }
         if (null !== $object->getCpuPeriod()) {
             $data->{'CpuPeriod'} = $object->getCpuPeriod();
+        }
+        if (null !== $object->getCpuQuota()) {
+            $data->{'CpuQuota'} = $object->getCpuQuota();
         }
         if (null !== $object->getCpusetCpus()) {
             $data->{'CpusetCpus'} = $object->getCpusetCpus();
