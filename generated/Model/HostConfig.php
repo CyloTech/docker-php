@@ -27,6 +27,10 @@ class HostConfig
     /**
      * @var int
      */
+    protected $memoryReservation;
+    /**
+     * @var int
+     */
     protected $cpuShares;
     /**
      * @var int
@@ -485,6 +489,26 @@ class HostConfig
     public function setMemorySwappiness($memorySwappiness = null)
     {
         $this->memorySwappiness = $memorySwappiness;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMemoryReservation()
+    {
+        return $this->memoryReservation;
+    }
+
+    /**
+     * @param int $memoryReservation
+     *
+     * @return self
+     */
+    public function setMemoryReservation($memoryReservation = null)
+    {
+        $this->memoryReservation = $memoryReservation;
 
         return $this;
     }

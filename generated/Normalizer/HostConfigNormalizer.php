@@ -80,6 +80,9 @@ class HostConfigNormalizer extends SerializerAwareNormalizer implements Denormal
         if (property_exists($data, 'MemorySwap')) {
             $object->setMemorySwap($data->{'MemorySwap'});
         }
+        if (property_exists($data, 'MemoryReservation')) {
+            $object->setMemoryReservation($data->{'MemoryReservation'});
+        }
         if (property_exists($data, 'CpuShares')) {
             $object->setCpuShares($data->{'CpuShares'});
         }
@@ -429,6 +432,9 @@ class HostConfigNormalizer extends SerializerAwareNormalizer implements Denormal
         }
         if (null !== $object->getMemorySwap()) {
             $data->{'MemorySwap'} = $object->getMemorySwap();
+        }
+        if (null !== $object->getMemoryReservation()) {
+            $data->{'MemoryReservation'} = $object->getMemoryReservation();
         }
         if (null !== $object->getCpuShares()) {
             $data->{'CpuShares'} = $object->getCpuShares();
