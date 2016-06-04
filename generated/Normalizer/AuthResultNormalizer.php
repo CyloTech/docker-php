@@ -7,11 +7,11 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
 
-class ProgressDetailNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
+class AuthResultNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
 {
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Docker\\API\\Model\\ProgressDetail') {
+        if ($type !== 'Docker\\API\\Model\\AuthResult') {
             return false;
         }
 
@@ -20,7 +20,7 @@ class ProgressDetailNormalizer extends SerializerAwareNormalizer implements Deno
 
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Docker\API\Model\ProgressDetail) {
+        if ($data instanceof \Docker\API\Model\AuthResult) {
             return true;
         }
 
@@ -35,21 +35,15 @@ class ProgressDetailNormalizer extends SerializerAwareNormalizer implements Deno
         if (isset($data->{'$ref'})) {
             return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
         }
-        $object = new \Docker\API\Model\ProgressDetail();
+        $object = new \Docker\API\Model\AuthResult();
         if (!isset($context['rootSchema'])) {
             $context['rootSchema'] = $object;
         }
-        if (property_exists($data, 'code')) {
-            $object->setCode($data->{'code'});
+        if (property_exists($data, 'Status')) {
+            $object->setStatus($data->{'Status'});
         }
-        if (property_exists($data, 'message')) {
-            $object->setMessage($data->{'message'});
-        }
-        if (property_exists($data, 'current')) {
-            $object->setCurrent($data->{'current'});
-        }
-        if (property_exists($data, 'total')) {
-            $object->setTotal($data->{'total'});
+        if (property_exists($data, 'IdentityToken')) {
+            $object->setIdentityToken($data->{'IdentityToken'});
         }
 
         return $object;
@@ -58,17 +52,11 @@ class ProgressDetailNormalizer extends SerializerAwareNormalizer implements Deno
     public function normalize($object, $format = null, array $context = [])
     {
         $data = new \stdClass();
-        if (null !== $object->getCode()) {
-            $data->{'code'} = $object->getCode();
+        if (null !== $object->getStatus()) {
+            $data->{'Status'} = $object->getStatus();
         }
-        if (null !== $object->getMessage()) {
-            $data->{'message'} = $object->getMessage();
-        }
-        if (null !== $object->getCurrent()) {
-            $data->{'current'} = $object->getCurrent();
-        }
-        if (null !== $object->getTotal()) {
-            $data->{'total'} = $object->getTotal();
+        if (null !== $object->getIdentityToken()) {
+            $data->{'IdentityToken'} = $object->getIdentityToken();
         }
 
         return $data;
