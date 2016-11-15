@@ -91,6 +91,9 @@ class IPAMNormalizer extends SerializerAwareNormalizer implements DenormalizerIn
         if (is_null($object->getConfig())) {
             $value = $object->getConfig();
         }
+        if (is_object($object->getConfig())) {
+            $value = [$this->serializer->serialize($object->getConfig(), 'raw', $context)];
+        }
         $data->{'Config'} = $value;
         $value_2          = $object->getOptions();
         if (is_object($object->getOptions())) {
