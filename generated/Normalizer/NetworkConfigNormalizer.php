@@ -57,6 +57,9 @@ class NetworkConfigNormalizer extends SerializerAwareNormalizer implements Denor
         if (property_exists($data, 'PortMapping')) {
             $object->setPortMapping($data->{'PortMapping'});
         }
+        if (property_exists($data, 'SandboxKey')) {
+            $object->setSandboxKey($data->{'SandboxKey'});
+        }
         if (property_exists($data, 'Networks')) {
             $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data->{'Networks'} as $key => $value) {
@@ -113,6 +116,9 @@ class NetworkConfigNormalizer extends SerializerAwareNormalizer implements Denor
         }
         if (null !== $object->getPortMapping()) {
             $data->{'PortMapping'} = $object->getPortMapping();
+        }
+        if (null !== $object->getSandboxKey()) {
+            $data->{'SandboxKey'} = $object->getSandboxKey();
         }
         if (null !== $object->getNetworks()) {
             $values = new \stdClass();
