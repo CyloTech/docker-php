@@ -36,6 +36,30 @@ class NetworkConfig
      * @var PortBinding[][]|null[]|null
      */
     protected $ports;
+    /**
+     * @var string
+     */
+    protected $sandboxKey;
+
+    /**
+     * @return string
+     */
+    public function getSandboxKey()
+    {
+        return $this->sandboxKey;
+    }
+
+    /**
+     * @param string $sandboxKey
+     *
+     * @return self
+     */
+    public function setSandboxKey($sandboxKey = null)
+    {
+        $this->sandboxKey = $sandboxKey;
+
+        return $this;
+    }
 
     /**
      * @return string
